@@ -4,22 +4,19 @@ import knex from './database/connection';
 
 const routes = express.Router(); 
 
-routes.post('/users',async(request,response)=>{
-    const {
-        name,
-        email,
-        login,
-        senha,
-        
-    } = request.body;
-
+routes.post('/users',async(req,res)=>{
+    var name = req.body.name;
+    var email = req.body.email;
+    var login = req.body.login;
+    var senha = req.body.senha;
+    
     await knex('users').insert({
         name,
         email,
         login,
         senha
     });
-    return response.json({message:name})
+    return res.json({message:name})
 })
 
 routes.get('/users', async (request,response)=>{
